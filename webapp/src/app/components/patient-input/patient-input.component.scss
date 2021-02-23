@@ -1,0 +1,71 @@
+// Copyright (c) 2021 Be The Match.
+
+// This file is part of DPB1 Prediction 
+// (see https://github.com/nmdp-bioinformatics/dpb1-prediction).
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+@import '../../../styles.scss';
+
+:host {
+    // font-family: Roboto, "Helvetica Neue", sans-serif;;
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    margin-right: calc(100% - 810px);
+}
+
+h4 {
+    margin-bottom: 10px;
+}
+
+.patient {
+    overflow-y: hidden;
+}
+
+.patient-table {
+    width: 100%;
+    padding-left: 24px;
+    color : #1D3649;
+    tr {
+        th {
+            width: 10%;
+            padding: 5px;
+            text-align: left;
+        }
+        td {
+            width: 150px;
+            height: 42px;
+            margin: 2px;
+            border-top: 1px solid gray;
+            // box-shadow: 0px 0px 1px #aaaaaa;
+            line-height: 0.3;
+        }
+    }
+}
+
+.collapsed {
+    width: 91px;
+}
+
+.patient-dialog {
+    width: 200px;
+    height: 70px;
+    margin: 0px 10px;
+    float : left;
+}
+
+button {
+    margin-top: 7px;
+}

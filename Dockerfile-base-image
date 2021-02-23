@@ -1,0 +1,20 @@
+FROM python:3.7
+
+LABEL maintainer="nmdp-bioinformatics"
+RUN apt-get update && apt-get -y install nginx && apt-get autoremove
+RUN mkdir -p /run/nginx && rm -rf /usr/share/nginx/html/*
+
+# Create a dpb1 user
+RUN useradd -ms /bin/bash dpb1
+WORKDIR /home/dpb1
+
+# Copy Freq. Data
+COPY data/frequencies /home/dpb1/data/frequencies
+COPY data/tce_assignments.txt /home/dpb1/data/tce_assignments.txt
+
+# Install Python packages
+COPY requirements-deploy.txt /home/dpb1/requirements.txt
+RUN pip install --no-cache-dir -U pip && pip install --no-cache-dir -r requirements.txt
+
+# Install py-ard
+RUN pyard-import --data-dir /home/dpb1/data

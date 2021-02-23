@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  python-flask-backend:
+    image: nmdpbioinformatics/dpb1-pred-backend
+    ports:
+      - "5010:5010"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+    volumes:
+      - ./logs:/app/logs
+
+  frontend:
+    image: nmdpbioinformatics/dpb1-web-app
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3

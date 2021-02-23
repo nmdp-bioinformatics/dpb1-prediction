@@ -1,0 +1,220 @@
+// Copyright (c) 2021 Be The Match.
+
+// This file is part of DPB1 Prediction 
+// (see https://github.com/nmdp-bioinformatics/dpb1-prediction).
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+@import '../../../styles.scss';
+
+:host {
+    width: 100%;
+    height: 100%;
+    // max-width: 864px;
+    max-height: calc(100vh - 308px);
+    float: left;
+    overflow-y: scroll;
+    position: relative;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    // -ms-overflow-style: none;  /* IE and Edge */
+    // scrollbar-width: none;  /* Firefox */
+}
+
+.input {
+    height: 5px;
+    line-height: 5px;
+    width: calc(100% - 14px);
+    padding: 7px;
+}
+
+.dpb1-tces {
+    // overflow: scroll;
+    // max-height: 47px;
+    line-height: 15px;
+    p {
+        margin: 2px;
+    }
+}
+
+.patient.input {
+    border-radius: 2px;
+    border: 1px solid gray;
+    background-color: white;
+    margin: 1px;
+    width: calc(100% - 22px);
+    -moz-box-shadow:    inset 0 0 2px #000000;
+    -webkit-box-shadow: inset 0 0 2px #000000;
+    box-shadow:         inset 0 0 2px #000000;
+}
+
+.patient-button {
+    height:0px;
+    width:0px;
+    position: relative;
+    bottom: -5px;
+    left: -716px;
+    float: left;
+    z-index: 100;
+
+    button {
+        width: 20px;
+        padding: 0px;
+    }
+}
+
+
+table {
+    border-top: 1px solid gray;
+}
+
+.mat-table {
+    float: left;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-header-row {
+    height: 42px;
+}
+
+.mat-cell, .mat-header-cell {
+    color : #1D3649;
+    line-height : 0.3;
+    width: 100%;
+    min-width: 80px;
+    white-space: nowrap;
+}
+
+.mat-header-cell {
+    border-color: #91ACBC;
+    border-top-color: rgb(145, 172, 188);
+    border-right-color: rgb(145, 172, 188);
+    border-bottom-color: rgb(145, 172, 188);
+    border-left-color: rgb(145, 172, 188);
+    border-width: 0.0625rem 0 0.125rem;
+    border-top-width: 0.0625rem;
+    border-right-width: 0px;
+    border-bottom-width: 0.125rem;
+    border-left-width: 0px;
+    padding-left: 8px;
+    -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; 
+}
+
+th.mat-column-DPB1-TCE {
+    background-color: $SECONDARY_GREEN;
+    min-width: 113px;
+    cursor: pointer;
+}
+
+.mat-column-Ref {
+    width: 20px;
+}
+
+.mat-column-DPB1 {
+    border-left: 1px solid rgb(145, 172, 188);
+}
+
+.mat-column-DPB1-TCE {
+    border-left: 1px solid $SECONDARY_GREEN;
+    border-right: 1px solid rgb(145, 172, 188);
+    text-align: center;
+    min-width: 113px;
+    padding: 0px;
+}
+
+th.mat-header-cell:first-of-type {
+    padding-left: 10px;
+}
+
+td.mat-cell:first-of-type {
+    padding-left: 2px;
+}
+
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
+    padding-right: 0px;
+}
+
+.colored { background-color: #EDF0F2 }
+.disabled { color : #d6d6d6 }
+
+.paginator {
+    height: 100%;
+    width: 100%;
+    float :left;
+}
+
+.mat-paginator-sticky {
+    position: fixed;
+    bottom: 0px;
+    min-width: 470px;
+    height: 52px;
+    background-color: transparent;
+}
+
+mat-icon {
+    position : absolute;
+    left: 30px;
+}
+
+.mat-column-DPB1-TCE {
+    mat-icon {
+        left: 85px;
+    }
+}
+
+.mat-column-Source-ID-and-Population {
+    min-width: 96px;
+}
+
+.sort-indicator {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    min-height: 43px;
+    // float : left;
+}
+
+button {
+    height: 20px;
+    margin: 5px;
+    font-size: 12px;
+    float: left;
+    text-align: center;
+    height: 20px;
+    width: 120px;
+}
+
+.hide-patient-info {
+    position: sticky;
+    left: 0px;
+}
+
+.error-icon {
+    height: 30px;
+    margin-top: -7px;
+}
+
+// /* Hide scrollbar for Chrome, Safari and Opera */
+// :host::-webkit-scrollbar {
+//     display: none;
+// }

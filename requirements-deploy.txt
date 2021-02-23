@@ -1,0 +1,10 @@
+Flask==1.1.2
+Flask-Compress==1.5.0
+flask-restplus==0.13.0
+gunicorn==20.0.2
+mpmath==1.1.0
+py-ard==0.6.1
+requests==2.23.0
+sigfig==1.1.8
+toolz==0.11.1
+Werkzeug==0.16.1

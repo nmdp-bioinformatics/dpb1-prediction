@@ -1,0 +1,20 @@
+tests/results/*
+data/frequencies/*
+data/* Donor List*.csv
+validation/data/
+*.pyc
+*.swp
+*.swo
+*.code-workspace
+*.docx
+*.nfs*
+*/__pycache__/*.pyc
+venv/
+pretty.output
+validation/dataframes/*
+data/*
+!data/tce_assignments.txt
+
+validation/dataframes
+validation/results/export
+numeric.v3.zip

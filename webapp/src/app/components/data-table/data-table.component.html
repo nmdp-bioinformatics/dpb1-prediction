@@ -1,0 +1,269 @@
+<!-- Copyright (c) 2021 Be The Match.
+
+This file is part of DPB1 Prediction 
+(see https://github.com/nmdp-bioinformatics/dpb1-prediction).
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>. -->
+
+<table [@inOutAnimation] mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="DPB1">
+        <th mat-header-cell *matHeaderCellDef>DPB1</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+            <div 
+                [ngClass]="{'patient' : !donors}"
+                class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'DPB1 1', $event)">
+                    {{element['DPB1 1']}}
+            </div>
+            <div 
+                [ngClass]="{'patient' : !donors}"
+                class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'DPB1 2', $event)">
+                    {{element['DPB1 2']}}
+            </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="DPB1 TCE" sticky>
+        <th mat-header-cell *matHeaderCellDef
+        (mouseover)="changeCurrentSort('TCE P/M Likelihood')"
+        (mouseleave)="changeCurrentSort('')"
+        [@inOutAnimation]
+        (click)="sort('TCE P/M Likelihood')">
+            <div *ngIf="currentSelectedSort == 'TCE P/M Likelihood' ||
+                       currentHeaderSorted['header'] == 'TCE P/M Likelihood'"
+                [hidden]="!donors"
+                [@inOutAnimation]>
+                <mat-icon 
+                    *ngIf="(currentHeaderSorted['header'] == undefined ||
+                        (currentHeaderSorted['header'] == 'TCE P/M Likelihood' &&
+                        !currentHeaderSorted['ascending']))" 
+                    class="btn-up">
+                        keyboard_arrow_up
+                </mat-icon>
+                <mat-icon
+                    *ngIf="currentHeaderSorted['header'] == 'TCE P/M Likelihood' && 
+                        currentHeaderSorted['ascending']"
+                    class="btn-down">
+                        keyboard_arrow_down
+                </mat-icon>
+            </div>
+            <p *ngIf="donors"></p>DPB1 TCE
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <img [hidden]="element['TCE P/M Likelihood'] != -2 || element['DPB1 TCEs'] || element['Error']"
+                aria-label="loading-indicator"
+                src="assets/img/bar-loading-indicator.gif"
+                style="width:100%; max-width: 80px;"
+                alt="loading-indicator">
+            <div class="dpb1-tces" *ngIf="element['DPB1 TCEs']">
+                <p *ngFor="let DPB1_TCEs of element['DPB1 TCEs']">{{DPB1_TCEs.tce_groups}} - {{ DPB1_TCEs.probability | percent:'1.1' }}</p>
+            </div>
+            <div class="input" *ngIf="element['TCE P/M Likelihood'] != null && element['TCE P/M Likelihood'] != -1 && element['TCE P/M Likelihood'] != -2">
+                {{element['TCE P/M Likelihood'] | percent:'1.1'}} 
+                {{element['TCE P/M Likelihood'] == null ? '' : 'P/M'}}
+            </div>
+            <div class="input" *ngIf="element['TCE P/M Likelihood'] != null && element['TCE P/M Likelihood'] != -1 && element['TCE P/M Likelihood'] != -2">
+                {{1 - element['TCE P/M Likelihood'] | percent:'1.1'}} 
+                {{element['TCE P/M Likelihood'] == null ? '' : 'NP'}}
+            </div>
+            <div class="input" *ngIf="element['Error'] && !(!donors && element['DPB1 TCEs'] != null)"  >
+                <img
+                matTooltip="{{element['Error'] || element['DPB1 TCEs']}}"
+                [matTooltipPosition]="'right'"
+                aria-label="error"
+                class="error-icon"
+                src="assets/img/error-icon.png"
+                style="height: 20px"
+                alt="error-indicator">
+                <!-- {{element['Error']}} -->
+            </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="Ref">
+        <th mat-header-cell *matHeaderCellDef 
+            (mouseover)="changeCurrentSort('Ref')"
+            (mouseleave)="changeCurrentSort('')"
+            [ngClass]="{'sort-indicator' : donors}"
+            (click)="sort('Ref')">
+                <div *ngIf="currentSelectedSort == 'Ref' ||
+                        currentHeaderSorted['header'] == 'Ref'"
+                    [hidden]="!donors"
+                    [@inOutAnimation]>
+                    <mat-icon 
+                        *ngIf="(currentHeaderSorted['header'] == undefined ||
+                            (currentHeaderSorted['header'] == 'Ref' &&
+                            !currentHeaderSorted['ascending']))" 
+                        class="btn-up">
+                            keyboard_arrow_up
+                    </mat-icon>
+                    <mat-icon
+                        *ngIf="currentHeaderSorted['header'] == 'Ref' && 
+                            currentHeaderSorted['ascending']"
+                        class="btn-down">
+                            keyboard_arrow_down
+                    </mat-icon>
+                </div>
+            <p *ngIf="donors">Ref</p>
+        </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div *ngIf="donors"
+                     class="input">
+                    {{ element['Ref'] }}
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="GRID/ID and Population">
+        <th mat-header-cell *matHeaderCellDef>
+            <p *ngIf="donors">GRID/ID</p>
+            <p>Population</p>
+        </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div *ngIf="donors"
+                     class="input" contenteditable="false" (blur)="updateList(i, 'sourceID', $event)">
+                    {{element['GRID/ID']}}
+                </div>
+                <div 
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'Population', $event)">
+                    {{element['Population']}}
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="Age and Sex">
+        <th mat-header-cell *matHeaderCellDef
+        (mouseover)="changeCurrentSort('Age')"
+        (mouseleave)="changeCurrentSort('')"
+        [ngClass]="{'sort-indicator' : donors}"
+        (click)="sort('Age')">
+            <div *ngIf="currentSelectedSort == 'Age' ||
+                       currentHeaderSorted['header'] == 'Age'"
+                [hidden]="!donors"
+                [@inOutAnimation]>
+                <mat-icon 
+                    *ngIf="(currentHeaderSorted['header'] == undefined ||
+                        (currentHeaderSorted['header'] == 'Age' &&
+                        !currentHeaderSorted['ascending']))" 
+                    class="btn-up">
+                        keyboard_arrow_up
+                </mat-icon>
+                <mat-icon
+                    *ngIf="currentHeaderSorted['header'] == 'Age' && 
+                        currentHeaderSorted['ascending']"
+                    class="btn-down">
+                        keyboard_arrow_down
+                </mat-icon>
+            </div>
+            <p *ngIf="donors">Age</p>
+            <p *ngIf="donors">Sex</p>
+        </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div class="input" (blur)="updateList(i, 'age', $event)">
+                    <span [contenteditable]="editable || !donors" *ngIf="donors">{{element['Age'] || ''}}</span>
+                </div>
+                <div class="input" (blur)="updateList(i, 'sex', $event)">
+                    <span [contenteditable]="editable || !donors" *ngIf="donors">{{element['Sex']}}</span>
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="A">
+        <th mat-header-cell *matHeaderCellDef>A</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'A 1', $event)">
+                    {{element['A 1']}}
+                </div>
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'A 2', $event)">
+                    {{element['A 2']}}
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="B">
+        <th mat-header-cell *matHeaderCellDef>B</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'B 1', $event)">
+                    {{element['B 1']}}
+                </div>
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'B 2', $event)">
+                    {{element['B 2']}}
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="C">
+        <th mat-header-cell *matHeaderCellDef>C</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'C 1', $event)">
+                        {{element['C 1']}}
+                </div>
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'C 2', $event)">
+                        {{element['C 2']}}
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="DRB1">
+        <th mat-header-cell *matHeaderCellDef>DRB1</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'DRB1 1', $event)">
+                        {{element['DRB1 1']}}
+                </div>
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'DRB1 2', $event)">
+                        {{element['DRB1 2']}}
+                </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="DQB1">
+        <th mat-header-cell *matHeaderCellDef>DQB1</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'DQB1 1', $event)">
+                        {{element['DQB1 1']}}
+                </div>
+                <div
+                    [ngClass]="{'patient' : !donors}"
+                    class="input" [contenteditable]="editable || !donors" (blur)="updateList(i, 'DQB1 2', $event)">
+                        {{element['DQB1 2']}}
+                </div>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="
+        let row; 
+        let even = even;
+        columns: displayedColumns"
+        [ngClass]="{colored : even}"></tr>
+</table>
+<div class="patient-button">
+    <button class="hide-patient-info"
+        *ngIf="!donors"
+        (click)="collapse()"><</button>
+  </div>
+<div class="paginator" [hidden]="!donors" >
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100]"
+        [pageSize]="10"
+        class="mat-paginator-sticky"
+        showFirstLastButtons></mat-paginator>
+</div>

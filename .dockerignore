@@ -1,0 +1,26 @@
+**
+# !run.sh
+!config.py
+!requirements-deploy.txt
+!data/tce_assignments.txt
+
+!webapp
+!webapp/dist**
+!webapp/nginx-conf**
+
+!/pyard/
+!/dpb1/**
+!/conf/**
+!data/**
+!tests/**
+!logs
+!docker-entrypoint-dpb1-service.sh
+!docker-entrypoint-tce-app.sh
+!server.py
+!wsgi.py
+!requirements.txt
+
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db

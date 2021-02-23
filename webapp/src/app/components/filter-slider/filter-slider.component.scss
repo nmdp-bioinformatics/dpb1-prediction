@@ -1,0 +1,70 @@
+// Copyright (c) 2021 Be The Match.
+
+// This file is part of DPB1 Prediction 
+// (see https://github.com/nmdp-bioinformatics/dpb1-prediction).
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+@import '../../../styles.scss';
+
+:host {
+    // position: relative;
+    // z-index: 1000;
+    height: 25px;
+    // width: 100%;
+    // min-width: 800px;
+    float: left;
+    position: relative;
+}
+
+span {
+    color: #8d8d8d;
+    line-height: 30px;
+    position: absolute;
+    left: 50px;
+    top: -7px;
+}
+
+.mat-slider-horizontal {
+//     min-width: 128px;
+    position: relative;
+    top: -7px;
+//     top: -16px;
+//     left: 85px;
+//     margin-top: 16px;
+
+    // position: absolute;
+    // top: 21px;
+    // left: -848px;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb{
+    background-color: $PRIMARY_GREEN;
+} 
+
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: $SECONDARY_GREEN;
+}
+
+::ng-deep .mat-slider-disabled .mat-slider-thumb {
+    background-color: #8d8d8d !important;
+}
+
+::ng-deep .mat-slider-disabled .mat-slider-track-fill {
+    background-color: #8d8d8d !important;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: $PRIMARY_GREEN;
+}

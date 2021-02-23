@@ -1,0 +1,34 @@
+<!-- Copyright (c) 2021 Be The Match.
+
+This file is part of DPB1 Prediction 
+(see https://github.com/nmdp-bioinformatics/dpb1-prediction).
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>. -->
+
+<p mat-dialog-title>Import</p>
+<div class="option">
+    <p>Select a MatchSource-exported file here:</p>
+    <input type="file"
+        (change)="handleFileInput($event)"/>
+    <div class="prompt" [ngClass]="{'disabled' : !data.donors}">
+        <p>Number of donors: {{numTotalDonors || '~'}}</p>
+        <p>Larger uploads could take several minutes to run depending on the typing resolution of the patient and imported donors.</p>
+        <p><i>Larger uploads will be truncated after the first 500 donors.</i></p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button
+                [disabled]="!data.donors"
+               [mat-dialog-close]= "trim(data.donors)">Import</button>
+    </div>
+</div>
