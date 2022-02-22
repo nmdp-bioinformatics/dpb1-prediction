@@ -19,6 +19,7 @@
 #
 import requests
 import json
+import pandas as pd
 
 class TCE_map(object):
 
@@ -26,11 +27,29 @@ class TCE_map(object):
             path='data/tce_assignments.txt', ard=None):
         self.path = path
         self.tce_assignments = self._get_tce_assignments()
+        print(self.tce_assignments)
         self.ard = ard
 
     def _get_tce_assignments(self):
+        """
+        Obtains TCE assignments from a hard-coded from IMGT.
+        :return: Dictionary of alleles to TCE groups (3, 2, 1, 0).
+        :rtype: Dict[str, str]
+        """
         with open(self.path, 'r') as f:
-            return json.loads(f.readline())
+            tce_map = json.loads(f.readline())
+
+        allele_header = 'Allele'
+        tce_header = 'V2_Assignment'
+        url = 'https://raw.githubusercontent.com/ANHIG/IMGTHLA/Latest/tce/dpb_tce.csv'
+        tce_df = pd.read_csv(url, comment='#')
+        tce_df.replace({'\$' : '', 'a' : ''}, regex=True, inplace=True)
+        tce_df = tce_df[[allele_header, tce_header]]
+        tce_df = tce_df[~tce_df[tce_header].isnull()]
+        tce_df.set_index(allele_header, inplace=True)
+        tce_map_updated = tce_df.to_dict()[tce_header]
+        tce_map.update(tce_map_updated)
+        return tce_map
     
     def assign_tce(self, dpb1_allele):
         if dpb1_allele not in self.tce_assignments:
