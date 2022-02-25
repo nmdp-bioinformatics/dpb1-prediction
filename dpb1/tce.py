@@ -27,7 +27,6 @@ class TCE_map(object):
             path='data/tce_assignments.txt', ard=None):
         self.path = path
         self.tce_assignments = self._get_tce_assignments()
-        print(self.tce_assignments)
         self.ard = ard
 
     def _get_tce_assignments(self):
