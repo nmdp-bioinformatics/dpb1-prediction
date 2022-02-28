@@ -3,7 +3,7 @@ from hamcrest import assert_that, is_
 from dpb1.match import Matches, MatchGrade
 from dpb1.dpb1 import DPB1_SLUG
 from dpb1.tce import TCE_SLUG
-from validation.dpb1_validator.observed import ObservedPair
+# from validation.dpb1_validator.observed import ObservedPair
 
 @given('these TCE group pairs and expected match categories')
 def step_impl(context):

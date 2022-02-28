@@ -778,8 +778,15 @@ Feature: Call REST Service
                         "dpb1_genotypes": [
                         {
                             "genotype": "DPB1*04:01+DPB1*04:01",
-                            "tce_groups": "3+3",
-                            "probability": 1
+                            "tce_groups": "3+3"
+                        },
+                        {
+                            "genotype": "DPB1*04:01+DPB1*677:01",
+                            "tce_groups": "3+3"
+                        },
+                        {
+                            "genotype": "DPB1*677:01+DPB1*677:01",
+                            "tce_groups": "3+3"
                         }
                         ]
                     }
@@ -813,13 +820,19 @@ Feature: Call REST Service
                         "dpb1_genotypes": [
                         {
                             "genotype": "DPB1*03:01+DPB1*04:01",
-                            "tce_groups": "2+3",
-                            "probability": 0.5035143163576772
+                            "tce_groups": "2+3"
+                        },
+                        {
+                            "genotype": "DPB1*03:01+DPB1*677:01",
+                            "tce_groups": "2+3"
                         },
                         {
                             "genotype": "DPB1*04:01+DPB1*14:01",
-                            "tce_groups": "2+3",
-                            "probability": 0.4964856836423228
+                            "tce_groups": "2+3"
+                        },
+                        {
+                            "genotype": "DPB1*14:01+DPB1*677:01",
+                            "tce_groups": "2+3"
                         }
                         ]
                     }
