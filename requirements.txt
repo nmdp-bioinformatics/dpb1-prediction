@@ -13,4 +13,4 @@ requests==2.22.0
 seaborn==0.10.0
 toolz==0.11.1
 sigfig==1.1.8
-Werkzeug==0.16.1
+Werkzeug==2.2.3
