@@ -31,7 +31,9 @@ class Genotype(object):
     :param name: A list of two Haplotype objects or a genotype name (str)
     """
 
-    def __init__(self, haplotypes):
+    def __init__(self, haplotypes, index : int = None, prob : float = None):
+        self.index = index
+        self.prob = prob
         self.SLUGs = None
         if isinstance(haplotypes, str):
             self.name = haplotypes
