@@ -1,6 +1,6 @@
 from behave import *
 from hamcrest import assert_that, is_
-from validation.dpb1_validator.predicted import Predicted, PredictedPair
+# from validation.dpb1_validator.predicted import Predicted, PredictedPair
 import pandas as pd
 from sigfig import round
 import json
